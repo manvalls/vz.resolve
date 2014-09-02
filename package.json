@@ -1,0 +1,19 @@
+{
+  "name": "vz.resolve",
+  "version": "1.0.0",
+  "description": "Resolve operations that may be sync or async",
+  "main": "main.js",
+  "dependencies": {
+    "vz.property": "",
+    "vz.next-tick": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/manvalls/vz.resolve.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manvalls/vz.resolve/issues"
+  },
+  "author": "Manuel Valls Fernández <manolo@chatiku.com>",
+  "license": "LGPL-3.0"
+}
