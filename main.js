@@ -56,5 +56,7 @@ module.exports = function(func,args,callback,thisArg){
   return ret;
 };
 
-module.exports.deferred = {};
+module.exports.deferred = {
+  toString: function(){ return Math.random() + '-' + Date.now(); }
+};
 
