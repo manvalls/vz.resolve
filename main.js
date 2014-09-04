@@ -5,26 +5,27 @@ var Property = require('vz.property'),
     callback = new Property(),
     thisArg = new Property(),
     
-    canResolveSync = false,
-    resolveSyncFlag = false,
-    resolveResult = null;
+    canResolveSync = new Property(),
+    resolveSyncFlag = new Property(),
+    resolveResult = new Property();
 
 function Resolver(cb,that){
+  canResolveSync.of(this).set(false);
   callback.of(this).set(cb);
   thisArg.of(this).set(that || this);
 }
 
 Object.defineProperty(Resolver.prototype,'resolve',{value: function(data){
   
-  if(canResolveSync){
-    resolveSyncFlag = true;
-    resolveResult = data;
+  if(canResolveSync.of(this).get()){
+    resolveSyncFlag.of(this).set(true);
+    resolveResult.of(this).set(data);
   }else callback.of(this).get().call(thisArg.of(this).get(),data);
   
 }});
 
-function clearFlag(){
-  canResolveSync = false;
+function clearFlag(resolver){
+  canResolveSync.of(resolver).set(false);
 }
 
 module.exports = function(func,args,callback,thisArg){
@@ -41,16 +42,16 @@ module.exports = function(func,args,callback,thisArg){
   
   resolver = new Resolver(callback,thisArg);
   
-  canResolveSync = true;
-  resolveSyncFlag = false;
-  nextTick(clearFlag);
+  canResolveSync.of(resolver).set(true);
+  resolveSyncFlag.of(resolver).set(false);
+  nextTick(clearFlag,[resolver]);
   func.apply(resolver,args);
-  clearFlag();
+  clearFlag(resolver);
   
-  if(resolveSyncFlag){
-    ret = resolveResult;
-    resolveSyncFlag = null;
-    resolveResult = null;
+  if(resolveSyncFlag.of(resolver).get()){
+    ret = resolveResult.of(resolver).get();
+    resolveSyncFlag.of(resolver).set(null);
+    resolveResult.of(resolver).set(null);
   }
   
   return ret;
