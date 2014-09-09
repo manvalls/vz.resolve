@@ -2,6 +2,8 @@
 
 [![NPM](https://nodei.co/npm/vz.resolve.png?downloads=true)](https://nodei.co/npm/vz.resolve/)
 
+No piece of software is ever completed, feel free to contribute
+
 ## Sample usage:
 
 ```javascript
