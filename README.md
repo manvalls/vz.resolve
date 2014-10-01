@@ -1,6 +1,6 @@
 # vz resolve
 
-**DEPRECATED** in favour of [vz.yielded](https://www.npmjs.org/package/vz.yielded "vz.yielded")
+**DEPRECATED in favour of [vz.yielded](https://www.npmjs.org/package/vz.yielded "vz.yielded")**
 
 [![NPM](https://nodei.co/npm/vz.resolve.png?downloads=true)](https://nodei.co/npm/vz.resolve/)
 
